@@ -1,4 +1,4 @@
-function [fitresult, gof] = fit_gauss_2d_2term_bg(x, y, gfp)
+function [fitresult, gof] = fit_gauss_2d_2term_bg(gfp)
 %CREATEFIT(X,Y,GFP)
 %  Create a fit.
 %
@@ -16,7 +16,9 @@ function [fitresult, gof] = fit_gauss_2d_2term_bg(x, y, gfp)
 
 
 %% Fit: 'untitled fit 1'.
-[xData, yData, zData] = prepareSurfaceData( x, y, gfp );
+x = size(gfp, 2);
+y = size(gfp, 1);
+[xData, yData, zData] = prepareSurfaceData( 1:x, 1:y, gfp );
 
 % Set up fittype and options.
 ft = fittype( 'a1*exp(-((x-mu1_x)^2/(2*sig1_x^2) + (y-mu1_y)^2/(2*sig1_y^2))) + a2*exp(-((x-mu2_x)^2/(2*sig2_x^2) + (y-mu2_y)^2/(2*sig2_y^2))) + bg;', 'independent', {'x', 'y'}, 'dependent', 'z' );
